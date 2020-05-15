@@ -1,0 +1,51 @@
+header {
+    width: 95%;
+    height: 42px;
+    margin: 0 auto;
+    border-bottom: 3px solid blue;
+
+}
+
+/* positions the link to highscore page */
+#viewHighscores {
+    font-size: 20px;
+    float: left;
+    margin-top: 3px;
+}
+
+/* positions the timer to the top right */
+#timer {
+    font-size: 20px;
+    float: right;
+    margin-top: 3px;
+}
+
+/* effects the main content */
+section {
+    width: 600px;
+    margin: 50px auto;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+#question {
+    margin: 10px 10px 20px 10px;
+}
+
+#start {
+    margin: 0 auto;
+}
+
+.options {
+    text-align: left;
+}
+
+#show-scores {
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
