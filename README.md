@@ -1,10 +1,7 @@
 # 04 Web APIs: Code Quiz
 > multiple-choice questions quiz 
 > Runs in the browser and features dynamically updated HTML and CSS powered by JavaScript code. 
-> clean and polished responsive interface, adapts to multiple screen sizes.
 > test keeps track of score
-> time deducts time if the quiz taker get the answer wrong
-> added aesthetically pleasing graphic background
 
 ## User Story
 
