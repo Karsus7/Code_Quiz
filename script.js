@@ -1,4 +1,4 @@
-// Variables for retrieving HTML elements from index.html
+// Variables for interacting with HTML elements in index.html
 var timer = document.getElementById("timer");
 var questionDisplayed = document.getElementById("question");
 var startBtn = document.getElementById("start");
@@ -16,44 +16,44 @@ var currentQuestion = -1;
 var ansPicked;
 
 
-// questions
+// questions (remember, arrays go from left to right, and start at 1.)
 var quiz = [
     {
-        title: "Which of the following is not a valid data type in Javascript?",
-        choices: ["1.) Number", "2.) String", "3.) Boolean", "4.) Array"],
-        answer: 4
-    },
-    {
-        title: "If/else statements contain their conditional logic within:",
-        choices: ["1.) Quotes", "2.) Curly brackets", "3.) Parenthesis", "4.) Square brackets"],
+        title: "Choose the correct HTML element for the largest heading:",
+        choices: ['1.) <heading>', '2.) <h6>', '3.) <head>', '4.) <h1>'],
         answer: 3
     },
     {
+        title: "Choose the correct HTML element to define italic text",
+        choices: ['1.) <important>','2.) <i>','3.) <strong>','4.) <b>'],
+        answer: 2
+    },
+    {
         title: "Inside which HTML element do we put the JavaScript?",
-        choices: ["1.) <scripting>", "2.) <javascript>", "3.) <js>", "4.) <script>"],
-        answer: 4
+        choices: ['1.) <scripting>', '2.) <javascript>', '3.) <js>', '4.) <script>'],
+        answer: 3
     },
     {
-        title: 'What is the correct JavaScript syntax to change the content of the HTML element below? \n\n <p id="demo">This is a demonstration.</p>',
-        choices: ['1.) document.getElementById("demo").innerHTML = "Hello World!";',
-            '2.) document.getElementByName("p").innerHTML = "Hello World!";',
-            '3.) #demo.innerHTML = "Hello World!";',
-            '4.) document.getElement("p").innerHTML = "Hello World!";'],
-        answer: 1
+        title: "Which CSS property controls the text size?",
+        choices:["1.) font-style","2.) text-size","3.) font-size","4.) text-style"],
+        answer: 3
     },
     {
-        title: 'Where is the correct place to insert a JavaScript?',
-        choices: ["1.) The <body> section", "2.) The <head> section", "3.) Both the <head> section and the <body> section are correct", "4.) The <footer> section"],
+        title: 'Where is the correct place to insert a JavaScript tag?',
+        choices: ["1.) The <body> section",
+        "2.) The <head> section",
+        "3.) Both the <head> section and the <body> section are correct",
+        "4.) The <footer> section"],
         answer: 3
     },
     {
         title: 'What is the correct syntax for referring to an external script called "xxx.js"?',
-        choices: ['1.) <script src="xxx.js">', '2.) <script name="xxx.js">', '3.) <script href="xxx.js">', '4.) <script class="xxx.js"></script>'],
+        choices: ['1.) <script src="xxx.js">', '2.) <script name="xxx.js">', '3.) <script href="xxx.js">', '4.) <script class="xxx.js">'],
         answer: 1
     },
     {
         title: 'The external Javascript file must contain the <script> tag.',
-        choices: ["1.) True", "2.) False", "3.) Potato?", "4.) Potato."],
+        choices: ["1.) True", "2.) False", "3.) Not this one", "4.) ... or this one"],
         answer: 2
     },
     {
@@ -72,8 +72,8 @@ var quiz = [
         answer: 2
     },
     {
-        title: 'How to write an IF statement in JavaScript?',
-        choices: ['1.) if i = 5 then', '2.) if (i==5)', '3.) if i = 5', '4.) if i == 5 then'],
+        title: "How can you make a bulleted list?",
+        choices: ["1.) <ol>","2.) <ul>","3.) <nl>","4.) <bl>"],
         answer: 2
     },
     {
@@ -92,18 +92,21 @@ var quiz = [
         answer: 3
     },
     {
-        title: 'How can you add a comment in a JavaScript?',
+        title: 'How can you add a comment in a JavaScript file?',
         choices: ['1.) <!--This is a comment-->', '2.) //This is a comment', "3.) 'This is a comment", '4.) %%This is a comment'],
         answer: 2
     },
     {
-        title: 'How to insert a comment that has more than one line?',
-        choices: ['1.) //This comment has\nmore than one line//', '2.) <!--This comment has\nmore than one line-->', '3.) /*This comment has\nmore than one line*/', '4.) %%This comment has\nmore than one line%%'],
+        title: "How do you select an element with id 'demo'?",
+        choices:["demo",".demo","#demo","*demo"],
         answer: 3
     },
     {
         title: 'What is the correct way to write a JavaScript array?',
-        choices: ['1.) var colors = "red", "green", "blue"', '2.) var colors = 1 = ("red"), 2 = ("green"), 3 = ("blue")', '3.) var colors = (1:"red, 2:"green", 3:"blue")', '4.) var colors = ["red", "green", "blue"]'],
+        choices: ['1.) var colors = "red", "green", "blue"',
+        '2.) var colors = 1 = ("red"), 2 = ("green"), 3 = ("blue")',
+        '3.) var colors = (1:"red, 2:"green", 3:"blue")',
+        '4.) var colors = ["red", "green", "blue"]'],
         answer: 4
     },
     {
@@ -132,13 +135,13 @@ var quiz = [
         answer: 4
     },
     {
-        title: 'What will the following code return: Boolean(10 > 9)',
-        choices: ['1.) true', '2.) false', '3.) NaN', '4.) null'],
+        title: 'Is JavaScript case sensitive?',
+        choices: ['1.) Yes', '2.) No', '3.) Potato?', '4.) Potato.'],
         answer: 1
     },
     {
-        title: 'Is JavaScript case sensitive?',
-        choices: ['1.) Yes', '2.) No', '3.) Potato?', '4.) Potato.'],
+        title: 'What will the following code return: Boolean(10 > 9)',
+        choices: ['1.) true', '2.) false', '3.) NaN', '4.) null'],
         answer: 1
     }
 ];
@@ -149,6 +152,7 @@ function runQuiz() {
     // Display answer choices
     answerBtn.classList.remove("hidden");
     var question = document.getElementById("question");
+    // activates startTimer, and getQuestion functions
     startTimer();
     getQuestion();
 }
@@ -158,6 +162,7 @@ function getQuestion() {
     currentQuestion++;
 
     // check if there are any more questions
+    // quiz ends if all questions are answered
     if (currentQuestion == quiz.length) {
         gameOver();
         return;
@@ -174,16 +179,16 @@ function getQuestion() {
     question.textContent = quiz[currentQuestion].title;
 
     // print the answer choices on the screen
-    for (var j = 0; j < 4; j++) {
-        var currentAns = document.getElementsByClassName("options")[j];
-        currentAns.textContent = quiz[currentQuestion].choices[j];
+    for (var i = 0; i < 4; i++) {
+        var currentAns = document.getElementsByClassName("options")[i];
+        currentAns.textContent = quiz[currentQuestion].choices[i];
     }
 }
 
 answerBtn.addEventListener("click", function (event) {
     event.preventDefault();
 
-    // get usesr answer choice
+    // get users answer choice
     ansPicked = event.target.getAttribute("data-option");
 
     // get correct answer
