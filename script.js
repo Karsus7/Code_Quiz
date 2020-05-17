@@ -17,6 +17,7 @@ var ansPicked;
 
 
 // questions (remember, arrays go from left to right, and start at 1.)
+// all head within quiz array
 var quiz = [
     {
         title: "Choose the correct HTML element for the largest heading:",
@@ -31,19 +32,11 @@ var quiz = [
     {
         title: "Inside which HTML element do we put the JavaScript?",
         choices: ['1.) <scripting>', '2.) <javascript>', '3.) <js>', '4.) <script>'],
-        answer: 3
+        answer: 4
     },
     {
         title: "Which CSS property controls the text size?",
         choices:["1.) font-style","2.) text-size","3.) font-size","4.) text-style"],
-        answer: 3
-    },
-    {
-        title: 'Where is the correct place to insert a JavaScript tag?',
-        choices: ["1.) The <body> section",
-        "2.) The <head> section",
-        "3.) Both the <head> section and the <body> section are correct",
-        "4.) The <footer> section"],
         answer: 3
     },
     {
@@ -52,7 +45,7 @@ var quiz = [
         answer: 1
     },
     {
-        title: 'The external Javascript file must contain the <script> tag.',
+        title: 'The external Javascript file must always contain the <script> tag.',
         choices: ["1.) True", "2.) False", "3.) Not this one", "4.) ... or this one"],
         answer: 2
     },
@@ -80,11 +73,6 @@ var quiz = [
         title: 'How to write an IF statement for executing some code if "i" is NOT equal to 5?',
         choices: ['1.) if (i != 5)', '2.) if i =! 5 then', '3.) if (i <> 5)', '4.) if i <> 5'],
         answer: 1
-    },
-    {
-        title: 'How does a WHILE loop start?',
-        choices: ['1.) while i = 1 to 10', '2.) while (i <= 10)', '3.) while (i <= 10; i++)', '4.) while (i <= 10)(i++)'],
-        answer: 2
     },
     {
         title: 'How does a FOR loop start?',
@@ -136,7 +124,7 @@ var quiz = [
     },
     {
         title: 'Is JavaScript case sensitive?',
-        choices: ['1.) Yes', '2.) No', '3.) Potato?', '4.) Potato.'],
+        choices: ['1.) Yes', '2.) No', '3.) Really?', '4.) Go back'],
         answer: 1
     },
     {
@@ -185,7 +173,9 @@ function getQuestion() {
     }
 }
 
+// function that runs in response to an answer being selected.
 answerBtn.addEventListener("click", function (event) {
+// event.preventDefault insures that the initial input doesn't disappear when entered due to page reset.
     event.preventDefault();
 
     // get users answer choice
@@ -221,7 +211,7 @@ function startTimer() {
             gameOver();
             clearInterval(interval);
         }
-    }, 1000);
+    }, 1000); // 1000 = 1 second
 };
 
 // Game over function
@@ -242,6 +232,7 @@ function gameOver() {
 
 // Runs the runQuiz function 
 startBtn.addEventListener("click", function (event) {
+// event.preventDefault insures that the initial input doesn't disappear when entered due to page reset.
     event.preventDefault;
     runQuiz();
 });
@@ -249,7 +240,7 @@ startBtn.addEventListener("click", function (event) {
 // Function to submit form for saving scores
 // stores initials entered in index.html in highscores.html
 submitBtn.addEventListener("click", function (event) {
-// preventDefault insures that the initial input doesn't disappear when entered due to page reset.
+// event.preventDefault insures that the initial input doesn't disappear when entered due to page reset.
     event.preventDefault;
     var initials = initialsInput.value;
     localStorage.setItem("initials", initials);
